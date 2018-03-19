@@ -1,5 +1,5 @@
 def give_number(numbers):
-  ln = list(numbers)
+  ln = numbers.split(",")
   return "New List [" +ln[0]+ ", " +ln[-1]+ "]"
 
 # 
