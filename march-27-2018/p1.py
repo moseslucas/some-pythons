@@ -1,8 +1,8 @@
-def reverseIt(num):
-  num = num.split(" ")
-  num.reverse()
-  num = " ".join(num)
-  return num
+def reverseIt(n):
+  n = n.split(" ")
+  n.reverse()
+  n = " ".join(n)
+  return n
   
 def start():
   N = raw_input("Input: ")
