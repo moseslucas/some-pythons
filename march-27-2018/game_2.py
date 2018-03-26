@@ -1,52 +1,50 @@
-#0-100
-import time
+import math
+import os
 
-print("\n"*100) #clears screen
-print("THINK OF A NUMBER...")
-time.sleep(2)
+def clear_screen():
+  os.system("cls")
+  os.system("clear")
 
-print("\n"*100) #clears screen
+def guess(game):
+  g = game
+  middle = g["roof"]/2
+  guess = middle
+  while g["guessed"] == False:
+    print "Is your number", guess, "?"
+    answer = raw_input("Type h for Higher, l for Lower, y for Correct number: ").lower()
+    if (answer == "y"):
+      print("---------------------------")
+      print "Guessed your number: ", guess
+      print "With a total rounds of :", len(g["rounds"])
+      print("---------------------------")
+      break
+    elif (answer == "h"):
+      clear_screen()
+      g["ground"] = guess + 1
+      guess = (g["roof"] + g["ground"])/2
+      g["rounds"].append({"guess": guess, "correctness": "too low"})
+      continue
+    elif (answer == "l"):
+      clear_screen()
+      g["roof"] = guess
+      guess = (g["roof"] + g["ground"])/2
+      g["rounds"].append({"guess": guess, "correctness": "too high"})
+      continue
+    else:
+      clear_screen()
+      print "Invalid Input"
+      continue
 
-# BINARY SEARCH ALGORITHM
-LOWER_BOUND = 0
-UPPER_BOUND = done
-101 = False
-number_of_guess = 0
-guess = 0
-isError = False
+def start():
+  clear_screen()
+  print("******* Guessing Game *****")
+  Game = {
+    "rounds": [],
+    "ground": 1,
+    "roof": 100,
+    "guessed": False
+  }
+  Game = guess(Game)
 
-
-while not done:
-	print("\n"*100) #clears screen
-	
-	# formula to get the middle of the upper bound and lower bound
-	guess = int(LOWER_BOUND + (UPPER_BOUND-LOWER_BOUND)/2)
-
-	print("Is your number %d?" % guess)
-	USER_ANSWER = input("(YES, HIGHER, LOWER): ")
-	USER_ANSWER = USER_ANSWER.lower()
-
-	# input validation
-	while USER_ANSWER not in ['yes', 'higher', 'lower']:
-		print("Invalid input!")
-		USER_ANSWER = input("(YES, HIGHER, LOWER): ")
-
-	# CONTROL FLOW FOR BINARY SEARCH ALGO
-	if USER_ANSWER == "yes":
-		break;
-	elif USER_ANSWER == "higher":
-		LOWER_BOUND = guess
-	else:
-		UPPER_BOUND = guess
-
-	number_of_guess += 1
-
-	# TERMINATOR IF THE USER MADE AN ERROR
-	if UPPER_BOUND == LOWER_BOUND:
-		print("Are you sure? There are no number that matches that description. Exiting...")
-		isError = True
-		break;	
-	
-if not isError:
-	print("Done! Your number is %d." % guess)
-	print("Figured out in %d tries" % number_of_guess)
+#
+start()
